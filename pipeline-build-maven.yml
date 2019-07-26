@@ -12,19 +12,19 @@ resources:
     uri: {{resource_version_uri}}
     branch: {{resource_version_branch}}
     file: version
-    private_key: {{private-key-github}}       
+    private_key: {{private-key-github-todos-version}}       
 - name: resource-unit
   type: git
   source:
     uri: {{resource_unit_uri}}
     branch: {{resource_unit_branch}}
-    private_key: {{private-key-github}} 
+    private_key: {{private-key-github-todos-api}} 
 - name: resource-release-unit
   type: github-release
   source:
     owner: {{resource_release_owner}}
     repository: {{resource_release_repository}}
-    access_token: {{private-token-github}}       
+    access_token: {{private-token-github}}
 jobs:
 - name: job-build
   serial: true

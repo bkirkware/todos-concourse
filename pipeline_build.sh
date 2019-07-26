@@ -9,17 +9,17 @@ APP=$1
 PIPELINE_NAME=${APP}-build  
 BUILD_NAME=${APP}
 UNIT_BRANCH=master
-UNIT_URI=git@github.com:corbtastik/${APP}.git
+UNIT_URI=git@github.com:bkirkware/${APP}.git
 VERSION_BRANCH=master
-VERSION_URI=git@github.com:corbtastik/todos-version.git
+VERSION_URI=git@github.com:bkirkware/todos-version.git
 VERSION_BUMP=patch
 VERSION_TAG=HOWDY
 RELEASE_REPOSITORY=${APP}
-RELEASE_OWNER=corbtastik
-fly sp -t ci -c pipeline-build-maven.yml -p ${PIPELINE_NAME} -l creds.yml \
+RELEASE_OWNER=bkirkware
+fly sp -t kirklab -c pipeline-build-maven.yml -p ${PIPELINE_NAME} -l creds.yml \
   -v build_name=${BUILD_NAME} \
   -v resource_concourse_branch=master \
-  -v resource_concourse_uri=https://github.com/corbtastik/todos-concourse.git \
+  -v resource_concourse_uri=https://github.com/bkirkware/todos-concourse.git \
   -v resource_unit_branch=${UNIT_BRANCH} \
   -v resource_unit_uri=${UNIT_URI} \
   -v resource_version_branch=${VERSION_BRANCH} \
