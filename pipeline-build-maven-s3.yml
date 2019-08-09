@@ -40,7 +40,7 @@ jobs:
   - task: task-detect
     file: resource-concourse/ci/detect-unit.yml    
   - task: task-build
-    file: resource-concourse/ci/build-maven.yml
+    file: resource-concourse/ci/build-maven-kafka.yml
   - put: resource-release-unit-s3
     params:
       file: resource-build/*.jar
