@@ -1,0 +1,46 @@
+---
+resources:
+- name: resource-concourse
+  type: git
+  source:
+    uri: {{resource_concourse_uri}}
+    branch: {{resource_concourse_branch}}  
+- name: resource-version
+  type: semver
+  source:
+    driver: git
+    uri: {{resource_version_uri}}
+    branch: {{resource_version_branch}}
+    file: version    
+- name: resource-unit
+  type: git
+  source:
+    uri: {{resource_unit_uri}}
+    branch: {{resource_unit_branch}}
+
+- name: resource-release-unit-s3
+  type: s3
+  icon: file-upload
+  source:
+    access_key_id: ((minio_access_key_id))
+    secret_access_key: ((minio_secret_access_key))
+    endpoint: ((minio_endpoint))
+    bucket: kirklab-artifacts
+    regexp: ((build_name))-(.*).jar
+    disable_ssl: true
+
+jobs:
+- name: job-build
+  serial: true
+  plan:
+  - get: resource-concourse
+  - get: resource-unit
+  - get: resource-version    
+    trigger: true  
+  - task: task-detect
+    file: resource-concourse/ci/detect-unit.yml    
+  - task: task-build
+    file: resource-concourse/ci/build-maven.yml
+  - put: resource-release-unit-s3
+    params:
+      file: resource-build/*.jar

@@ -16,7 +16,7 @@ VERSION_BUMP=patch
 VERSION_TAG=HOWDY
 RELEASE_REPOSITORY=${APP}
 RELEASE_OWNER=bkirkware
-fly sp -t kirklab -c pipeline-build-maven.yml -p ${PIPELINE_NAME} -l creds.yml \
+fly sp -t kirklab -c pipeline-build-maven-s3.yml -p ${PIPELINE_NAME} -l creds.yml \
   -v build_name=${BUILD_NAME} \
   -v resource_concourse_branch=master \
   -v resource_concourse_uri=https://github.com/bkirkware/todos-concourse.git \
