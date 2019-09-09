@@ -6,7 +6,7 @@ if [ "${DETECTED}" = "maven" ]; then
   echo "maven_build: ${DETECTED} ${VERSION}"
   cd resource-unit
   ./mvnw versions:set -DnewVersion=${VERSION}
-  ./mvnw clean package -Dmaven.test.skip=${SKIP_UNIT_TESTS}
+  ./mvnw clean package -Dmaven.test.skip=${SKIP_UNIT_TESTS} -P kafka
   cd target/
   cp -R . ../../resource-build/  
 fi

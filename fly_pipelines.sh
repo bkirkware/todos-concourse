@@ -3,6 +3,6 @@ for i in todos-api todos-edge todos-webui; do
   ./pipeline_deploy.sh $i
 done
 
-for i in todos-loggregator; do
+for i in todos-loggregator todos-processor todos-sink; do
   ./pipeline_build_s3.sh $i
 done
